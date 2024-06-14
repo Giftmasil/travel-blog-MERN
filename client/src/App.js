@@ -6,9 +6,11 @@ import Register from "./pages/register/Register";
 import Settings from "./pages/settings/Settings";
 import Single from "./pages/single/Single";
 import Write from "./pages/write/Write";
+import { useContext } from "react";
+import { Context } from "./context/Context";
 
 function App() {
-  const currentUser = true; // Replace this with actual user authentication logic
+  const {user} = useContext(Context);
 
   return (
     <Router>
@@ -18,20 +20,20 @@ function App() {
         <Route path="/posts" element={<Homepage />} />
         <Route
           path="/register"
-          element={currentUser ? <Navigate to="/" /> : <Register />}
+          element={user ? <Navigate to="/" /> : <Register />}
         />
         <Route
           path="/login"
-          element={currentUser ? <Navigate to="/" /> : <Login />}
+          element={user ? <Navigate to="/" /> : <Login />}
         />
         <Route path="/post/:id" element={<Single />} />
         <Route
           path="/write"
-          element={currentUser ? <Write /> : <Navigate to="/login" />}
+          element={user ? <Write /> : <Navigate to="/login" />}
         />
         <Route
           path="/settings"
-          element={currentUser ? <Settings /> : <Navigate to="/login" />}
+          element={user ? <Settings /> : <Navigate to="/login" />}
         />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

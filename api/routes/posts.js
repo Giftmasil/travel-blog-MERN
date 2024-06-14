@@ -31,31 +31,42 @@ router.put("/:id", async (req, res) => {
         res.status(500).json(err);
       }
     } else {
-      res.status(401).json({message: "You can update only your post!"});
+      res.status(401).json({message:"You can update only your post!"});
     }
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-//DELETE POST
+// DELETE POST
 router.delete("/:id", async (req, res) => {
+  console.log('Delete request received for ID:', req.params.id);
   try {
     const post = await Post.findById(req.params.id);
+    if (!post) {
+      console.log('Post not found for ID:', req.params.id);
+      return res.status(404).json({ message: "Post not found!" });
+    }
     if (post.username === req.body.username) {
       try {
-        await post.delete();
+        await Post.deleteOne(post);
+        console.log('Post deleted successfully for ID:', req.params.id);
         res.status(200).json("Post has been deleted...");
       } catch (err) {
-        res.status(500).json(err);
+        console.error('Error deleting post:', err);
+        res.status(500).json({ message: "Error deleting post", error: err.message });
       }
     } else {
-      res.status(401).json("You can delete only your post!");
+      console.log('Unauthorized attempt to delete post for ID:', req.params.id);
+      res.status(401).json({ message: "You can delete only your post!" });
     }
   } catch (err) {
-    res.status(500).json(err);
+    console.error('Error finding post:', err);
+    res.status(500).json({ message: "Error finding post", error: err.message });
   }
 });
+
+
 
 //GET POST
 router.get("/:id", async (req, res) => {

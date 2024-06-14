@@ -1,23 +1,40 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./topbar.css";
+import { useContext } from "react";
+import { Context } from "../../context/Context";
 
 export default function Topbar() {
-  const user = true;
+  const {user, dispatch} = useContext(Context);
   const location = useLocation();
   const currentPath = location.pathname;
+  const navigate = useNavigate()
+  const PF = "http://localhost:5000/images/"
+
+  const handleLogout = () => {
+    dispatch({ type: "LOGOUT" })
+    navigate("/login")
+  }
 
   return (
     <div className="top">
       <div className="topLeft">
-        <a href="https://www.facebook.com/TheDummyPage/"><i className="topIcon fab fa-facebook-square"></i></a>
-        <a href="https://www.instagram.com/_mas.ila_/"><i className="topIcon fab fa-instagram-square"></i></a>
-        <a href="https://www.pinterest.com/fakepinterest/"><i className="topIcon fab fa-pinterest-square"></i></a>
-        <a href="https://twitter.com/_muuo11_"><i className="topIcon fab fa-twitter-square"></i></a>
+        <a href="https://www.facebook.com/TheDummyPage/">
+          <i className="topIcon fab fa-facebook-square"></i>
+        </a>
+        <a href="https://www.instagram.com/_mas.ila_/">
+          <i className="topIcon fab fa-instagram-square"></i>
+        </a>
+        <a href="https://www.pinterest.com/fakepinterest/">
+          <i className="topIcon fab fa-pinterest-square"></i>
+        </a>
+        <a href="https://twitter.com/_muuo11_">
+          <i className="topIcon fab fa-twitter-square"></i>
+        </a>
       </div>
       <div className="topCenter">
         <ul className="topList">
           <li className="topListItem">
-            <Link className="link" to="/" >
+            <Link className="link" to="/">
               HOME
             </Link>
           </li>
@@ -28,18 +45,24 @@ export default function Topbar() {
               WRITE
             </Link>
           </li>
-          {user && <li className="topListItem">LOGOUT</li>}
+          {user && <li className="topListItem" onClick={handleLogout}>LOGOUT</li>}
         </ul>
       </div>
       <div className="topRight">
         {user ? (
+          <div>
           <Link className="link" to="/settings">
             <img
               className="topImg"
-              src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+              src={PF + user.profilePic}
               alt=""
             />
           </Link>
+          <div className="Search">
+            <i className="topSearchIcon fas fa-search"></i>
+            <input className="searchInput" type="text" />
+          </div>
+          </div>
         ) : (
           currentPath !== "/login" &&
           currentPath !== "/register" && (
@@ -56,10 +79,6 @@ export default function Topbar() {
                   </Link>
                 </li>
               </ul>
-              <div className="Search">
-                <i className="topSearchIcon fas fa-search"></i>
-                <input className="searchInput" type="text"/>
-              </div>
             </div>
           )
         )}

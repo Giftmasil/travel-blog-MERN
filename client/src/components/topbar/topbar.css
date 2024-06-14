@@ -73,6 +73,7 @@
     &:focus {
       outline-style: none;
     }
+  }
 
     .Search {
       display: flex;
@@ -80,4 +81,3 @@
       justify-content: center;
       flex-flow: row nowrap;
     }
-  }
