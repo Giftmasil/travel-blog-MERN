@@ -3,15 +3,24 @@
   }
   
   .writeImg {
-    margin-left: 150px;
-    width: 70vw;
-    height: 70vh;
-    border-radius: 10px;
-    object-fit: cover;
+    width: 730px;
+    height: 500px;
+    top: 325px;
+    left: 29px;
+    gap: 0px;
+    opacity: 0px;
+    padding-left: 20px;
+
   }
   
   .writeForm {
-    position: relative;
+    width: 824px;
+height: 542px;
+top: 328px;
+left: 876px;
+gap: 0px;
+opacity: 0px;
+
   }
   
   .writeFormGroup {

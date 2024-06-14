@@ -5,7 +5,6 @@ const PostSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
-      /* unique: true, */
     },
     desc: {
       type: String,
@@ -22,6 +21,24 @@ const PostSchema = new mongoose.Schema(
     categories: {
       type: Array,
       required: false,
+    },
+    likes: {
+      type: [String],
+      default: [],
+    },
+    comments: {
+      type: [
+        {
+          userId: String,
+          username: String,
+          text: String,
+          createdAt: {
+            type: Date,
+            default: Date.now,
+          },
+        },
+      ],
+      default: [],
     },
   },
   { timestamps: true }

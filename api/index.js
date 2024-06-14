@@ -9,6 +9,7 @@ const postRoute = require("./routes/posts")
 const categoriesRoute = require("./routes/categories")
 const multer = require("multer")
 const path = require("path")
+const searchRoute = require("./routes/search");
 
 
 //MIDDLEWARE FOR JSON
@@ -47,6 +48,7 @@ app.use("/api/auth", authRoute)
 app.use("/api/users", userRoute)
 app.use("/api/posts", postRoute)
 app.use("/api/categories", categoriesRoute)
+app.use("/api/search", searchRoute);
 
 app.listen(PORT, () => {
     console.log("Server is running on port 5000")

@@ -1,9 +1,5 @@
 .login {
-    background: linear-gradient(
-        rgba(255, 255, 255, 0.5),
-        rgba(255, 255, 255, 0.5)
-      ),
-      url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background: #1A237E;
     background-size: cover;
     font-size: 1.5rem;
   }
@@ -18,14 +14,21 @@
     background-color: rgba(0, 0, 0, 0.205);
   }
   
+  .loginIcon {
+    font-size: 124px; /* Adjust size as needed */
+    margin-right: 8px; /* Add space between icon and title */
+    color: white; /* Change color as needed */
+  }
+
   .loginTitle {
-    font-size: 4rem;
+    font-size: 3rem;
   }
   
   .loginForm {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
+    width: 40%;
   }
   
   .loginForm > label {
@@ -44,14 +47,16 @@
   }
   
   .loginButton {
+    width: 20%;
     margin-top: 20px;
     cursor: pointer;
-    background-color: rgb(235, 108, 108);
-    color: white;
+    background-color: white;
+    color: black;
     padding: 10px;
     border: none;
     border-radius: 10px;
-    text-align: center;
+    align-items: center;
+    align-self: flex-end;
     &:hover {
         filter: brightness(105%);
     }
@@ -62,15 +67,15 @@
   }
   
   .loginRegisterButton {
-    position: absolute;
-    top: 90px;
-    right: 20px;
-    background-color: teal;
+    width: 20%;
+    margin-top: 20px;
     cursor: pointer;
+    background-color: white;
+    color: black;
     padding: 10px;
     border: none;
-    color: white;
     border-radius: 10px;
+    align-items: center;
     &:hover {
         filter: brightness(110%);
     }

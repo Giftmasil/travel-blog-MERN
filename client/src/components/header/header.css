@@ -1,30 +1,15 @@
-.header {
-  margin-top: 60px;
-}
+.headers {
+  width: 732px;
+  height: 40px;
+  top: 146px;
+  left: 28px;
+  gap: 0px;
+  opacity: 0px;
+  font-family: Inter;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 58.09px;
+  letter-spacing: 0.04em;
+  text-align: left;
 
-.headerTitles {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: "Lora", serif;
-  color: #444;
-}
-
-.headerTitleSm {
-  position: absolute;
-  top: 18%;
-  font-size: 20px;
-}
-
-.headerTitleLg {
-  position: absolute;
-  top: 20%;
-  font-size: 100px;
-}
-
-.headerImg {
-  width: 100%;
-  height: 100%;
-  margin-top: -50px;
-  object-fit: cover;
 }

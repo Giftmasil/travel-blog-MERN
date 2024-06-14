@@ -6,6 +6,7 @@ import Register from "./pages/register/Register";
 import Settings from "./pages/settings/Settings";
 import Single from "./pages/single/Single";
 import Write from "./pages/write/Write";
+import SearchResults from "./pages/searchresult/searchResults"
 import { useContext } from "react";
 import { Context } from "./context/Context";
 
@@ -35,6 +36,7 @@ function App() {
           path="/settings"
           element={user ? <Settings /> : <Navigate to="/login" />}
         />
+        <Route path="/search" element={<SearchResults />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>

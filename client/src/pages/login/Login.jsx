@@ -27,7 +27,8 @@ export default function Login() {
   return (
     <div className="login">
         <div className="dark">
-            <span className="loginTitle">Login</span>
+        <i class=" loginIcon fa-solid fa-plane-departure"></i>
+            <span className="loginTitle ">Voyager</span>
             <form className="loginForm" onSubmit={handleSubmit}>
                 <label htmlFor="loginEmail">Username</label>
                 <input 
@@ -46,6 +47,7 @@ export default function Login() {
                 />
                 <button className="loginButton" type="submit" disabled={isFetching}>Login</button>
             </form>
+            <span htmlFor="loginEmail">Are you new here?</span>
             <button className="loginRegisterButton">
               <Link className="link" to='/register'>Register</Link>
             </button>

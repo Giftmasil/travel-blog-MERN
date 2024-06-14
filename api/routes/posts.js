@@ -101,4 +101,56 @@ router.get("/", async (req, res) => {
   }
 });
 
+
+// LIKE POST
+router.put("/:id/like", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post.likes.includes(req.body.userId)) {
+      await post.updateOne({ $push: { likes: req.body.userId } });
+      res.status(200).json("The post has been liked");
+    } else {
+      res.status(403).json("You have already liked this post");
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// UNLIKE POST
+router.put("/:id/unlike", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (post.likes.includes(req.body.userId)) {
+      await post.updateOne({ $pull: { likes: req.body.userId } });
+      res.status(200).json("The post has been unliked");
+    } else {
+      res.status(403).json("You have not liked this post yet");
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// CREATE COMMENT
+router.post("/:id/comment", async (req, res) => {
+  const { userId, username, text } = req.body;
+  const comment = { userId, username, text };
+
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    post.comments.push(comment);
+    await post.save();
+    res.status(201).json(post.comments);
+  } catch (err) {
+    console.error("Error adding comment:", err);
+    res.status(500).json({ message: "Failed to add comment", error: err.message });
+  }
+});
+
+
 module.exports = router;

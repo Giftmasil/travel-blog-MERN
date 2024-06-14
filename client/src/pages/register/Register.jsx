@@ -27,7 +27,8 @@ export default function Register() {
   return (
     <div className="register">
         <div className="dark">
-            <span className="registerTitle">Register</span>
+        <i class=" loginIcon fa-solid fa-plane-departure"></i>
+        <span className="loginTitle ">Voyager</span>
             <form className="registerForm" onSubmit={handleSubmit}>
                 <label htmlFor="username">Username</label>
                 <input 

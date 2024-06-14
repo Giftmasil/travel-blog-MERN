@@ -10,7 +10,7 @@ export default function Write() {
   const [file, setFile] = useState(null)
   const {user} = useContext(Context)
   const navigate = useNavigate()
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
