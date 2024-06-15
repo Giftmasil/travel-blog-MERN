@@ -17,7 +17,7 @@ export default function Settings() {
   const [userPosts, setUserPosts] = useState([]);
   const [follows, setFollows] = useState([]);
   const [followings, setFollowings] = useState([]);
-  const PF = "http://localhost:5000/images/";
+  const PF = "https://travel-blog-mern-yk6m.onrender.com/images/";
 
   useEffect(() => {
     const fetchUserPosts = async () => {

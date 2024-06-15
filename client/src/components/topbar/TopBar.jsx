@@ -16,7 +16,7 @@ export default function Topbar() {
   const [isMoreDropdownOpen, setIsMoreDropdownOpen] = useState(false);
   const [categories, setCategories] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const PF = "http://localhost:5000/images/";
+  const PF = "https://travel-blog-mern-yk6m.onrender.com/images/";
 
   useEffect(() => {
     const getCats = async () => {
