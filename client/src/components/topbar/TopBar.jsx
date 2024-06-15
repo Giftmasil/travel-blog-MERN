@@ -79,7 +79,7 @@ export default function Topbar() {
           <ul className={`topList ${isMenuOpen ? "open" : ""}`}>
             <li className="topMostListContainer">
               <Link className="link" to="/">
-                HOME
+                Home
               </Link>
             </li>
             <li className="topMostListContainer" onClick={toggleDropdown}>
@@ -112,7 +112,7 @@ export default function Topbar() {
             </li>
             <li className="topMostListContainer">
               <Link className="link" to="/write">
-                CREATE
+                Create
               </Link>
             </li>
             <li className="topMostListContainer" onClick={toggleMoreDropdown}>

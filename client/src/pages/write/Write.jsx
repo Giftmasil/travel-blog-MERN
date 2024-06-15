@@ -3,6 +3,7 @@ import "./write.css";
 import axios from "axios";
 import { Context } from "../../context/Context";
 import { useNavigate } from "react-router-dom";
+import Chatbot from "../../components/chatbot/Chatbot";
 
 export default function Write() {
   const [title, setTitle] = useState("");
@@ -103,6 +104,7 @@ export default function Write() {
           </button>
           </div>
       </form>
+      <Chatbot />
     </div>
   );
 }

@@ -5,7 +5,7 @@ import axios from "axios";
 import { Context } from "../../context/Context";
 
 export default function Post({ post }) {
-  const PF = "https://travel-blog-mern-yk6m.onrender.com/images/";
+  const PF = "https://dummy-practice-upload.onrender.com/images/";
   const { user } = useContext(Context);
   const [likes, setLikes] = useState(post.likes);
   const [isLiked, setIsLiked] = useState(post.likes.includes(user._id));
@@ -73,7 +73,7 @@ export default function Post({ post }) {
 
   return (
     <div className="post">
-      <Link to={`https://travel-blog-mern-yk6m.onrender.com/api/post/${post._id}`} className="link">
+      <Link to={`/post/${post._id}`} className="link">
         <span className="postTitle">{post.title}</span>
       </Link>
       {post.photo && <img className="postImg" src={PF + post.photo} alt="posts" />}

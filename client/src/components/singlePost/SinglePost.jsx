@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { Context } from "../../context/Context";
 import "./singlepost.css";
 
+
+
 export default function SinglePost() {
   const location = useLocation();
   const path = location.pathname.split("/")[2];
@@ -68,7 +70,7 @@ const handleDelete = async () => {
 
   const handleFollow = async () => {
     try {
-      await axios.post(`/users/${post.userId}/follow`, { userId: user._id });
+      await axios.post(`https://travel-blog-mern-yk6m.onrender.com/api/users/${post.userId}/follow`, { userId: user._id });
       dispatch({ type: "UPDATE_SUCCESS", payload: {
         ...user,
         following: [...user.following, post.userId]
@@ -81,7 +83,7 @@ const handleDelete = async () => {
 
   const handleUnfollow = async () => {
     try {
-      await axios.put(`/users/${post.userId}/unfollow`, { userId: user._id });
+      await axios.put(`https://travel-blog-mern-yk6m.onrender.com/api/users/${post.userId}/unfollow`, { userId: user._id });
       dispatch({ type: "UPDATE_SUCCESS", payload: {
         ...user,
         following: user.following.filter(id => id !== post.userId)
