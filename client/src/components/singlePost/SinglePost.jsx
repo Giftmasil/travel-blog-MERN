@@ -19,7 +19,7 @@ export default function SinglePost() {
   useEffect(() => {
     const getPost = async () => {
       try {
-        const res = await axios.get(`/posts/${path}`);
+        const res = await axios.get(`https://travel-blog-mern-yk6m.onrender.com/api/posts/${path}`);
         setPost(res.data);
         setTitle(res.data.title);
         setDesc(res.data.desc);
@@ -39,7 +39,7 @@ export default function SinglePost() {
  // For updating a post
 const handleUpdate = async () => {
   try {
-    await axios.put(`/posts/${post._id}`, {
+    await axios.put(`https://travel-blog-mern-yk6m.onrender.com/api/posts/${post._id}`, {
       userId: user._id, // Ensure this is correctly sent
       username: user.username,
       title,
@@ -56,7 +56,7 @@ const handleDelete = async () => {
   const confirm = window.confirm("Are you sure you want to delete this post?");
   if (confirm) {
     try {
-      await axios.delete(`/posts/${post._id}`, {
+      await axios.delete(`https://travel-blog-mern-yk6m.onrender.com/api/posts/${post._id}`, {
         data: { userId: user._id }, // Ensure this is correctly sent
       });
       window.location.replace("/");

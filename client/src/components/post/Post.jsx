@@ -18,10 +18,10 @@ export default function Post({ post }) {
   const handleLike = async () => {
     try {
       if (isLiked) {
-        await axios.put(`/posts/${post._id}/unlike`, { userId: user._id });
+        await axios.put(`https://travel-blog-mern-yk6m.onrender.com/api/posts/${post._id}/unlike`, { userId: user._id });
         setLikes(likes.filter((id) => id !== user._id));
       } else {
-        await axios.put(`/posts/${post._id}/like`, { userId: user._id });
+        await axios.put(`https://travel-blog-mern-yk6m.onrender.com/api/posts/${post._id}/like`, { userId: user._id });
   
         // Create like notification
         const newNotification = {
@@ -31,7 +31,7 @@ export default function Post({ post }) {
           postId: post._id,
           text: `${user.username} liked your post.`, // Corrected notification text
         };
-        await axios.post("/notifications", newNotification);
+        await axios.post("https://travel-blog-mern-yk6m.onrender.com/api/notifications", newNotification);
   
         setLikes([...likes, user._id]);
       }
@@ -44,7 +44,7 @@ export default function Post({ post }) {
   const handleComment = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`/posts/${post._id}/comment`, {
+      const res = await axios.post(`https://travel-blog-mern-yk6m.onrender.com/api/posts/${post._id}/comment`, {
         userId: user._id,
         username: user.username,
         text: comment,
@@ -59,7 +59,7 @@ export default function Post({ post }) {
         postId: post._id,
         text: `${user.username} commented on your post.`, // Corrected notification text
       };
-      await axios.post("/notifications", newNotification);
+      await axios.post("https://travel-blog-mern-yk6m.onrender.com/api/notifications", newNotification);
       
       setComment(""); // Clear comment input after submission
     } catch (err) {
@@ -73,7 +73,7 @@ export default function Post({ post }) {
 
   return (
     <div className="post">
-      <Link to={`/post/${post._id}`} className="link">
+      <Link to={`https://travel-blog-mern-yk6m.onrender.com/api/post/${post._id}`} className="link">
         <span className="postTitle">{post.title}</span>
       </Link>
       {post.photo && <img className="postImg" src={PF + post.photo} alt="posts" />}

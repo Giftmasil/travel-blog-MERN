@@ -20,7 +20,7 @@ export default function Topbar() {
 
   useEffect(() => {
     const getCats = async () => {
-      const res = await axios.get('/categories');
+      const res = await axios.get('https://travel-blog-mern-yk6m.onrender.com/api/categories');
       setCategories(res.data);
     };
     getCats();
