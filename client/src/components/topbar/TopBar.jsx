@@ -16,11 +16,11 @@ export default function Topbar() {
   const [isMoreDropdownOpen, setIsMoreDropdownOpen] = useState(false);
   const [categories, setCategories] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const PF = "https://travel-blog-mern-yk6m.onrender.com/images/";
+  const PF = "http://localhost:5000/images/";
 
   useEffect(() => {
     const getCats = async () => {
-      const res = await axios.get('https://travel-blog-mern-yk6m.onrender.com/api/categories');
+      const res = await axios.get('http://localhost:5000/api/categories');
       setCategories(res.data);
     };
     getCats();

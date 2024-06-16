@@ -14,7 +14,7 @@ export default function Register() {
     setError("");
 
     try {
-      const response = await axios.post("https://travel-blog-mern-yk6m.onrender.com/api/auth/register", {
+      const response = await axios.post("http://localhost:5000/api/auth/register", {
         username,
         email,
         password,

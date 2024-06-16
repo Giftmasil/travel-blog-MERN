@@ -16,67 +16,73 @@ router.post("/", async (req, res) => {
 });
 
 // UPDATE POST
-router.put("/:id", verifyRoles, async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (!post) {
-      return res.status(404).json({ message: "Post not found" });
+      return res.status(404).json({ message: 'Post not found' });
     }
 
-    const { roles } = req.user;
-    if (roles && roles.includes(ROLES_LIST.Admin)) {
+    const { userId, roles } = req.body;
+    if (!userId || !roles) {
+      return res.status(400).json({ message: 'User ID and roles are required' });
+    }
+
+    console.log('Roles and User ID in Update:', roles, userId);
+
+    if (roles.Admin === 5150) { // Check if Admin role exists and is set to 5150
       const updatedPost = await Post.findByIdAndUpdate(
         req.params.id,
-        {
-          $set: req.body,
-        },
+        { $set: req.body },
         { new: true }
       );
-      res.status(200).json(updatedPost);
+      return res.status(200).json(updatedPost);
     } else {
-      // If not an admin, check if the user owns the post
-      if (post.userId === req.body.userId) {
+      if (post.userId.equals(userId)) { // Ensure proper comparison
         const updatedPost = await Post.findByIdAndUpdate(
           req.params.id,
-          {
-            $set: req.body,
-          },
+          { $set: req.body },
           { new: true }
         );
-        res.status(200).json(updatedPost);
+        return res.status(200).json(updatedPost);
       } else {
-        res.status(401).json({ message: "You can update only your post!" });
+        return res.status(401).json({ message: 'You can update only your post!' });
       }
     }
   } catch (err) {
-    console.error("Error updating post:", err);
+    console.error('Error updating post:', err);
     res.status(500).json(err);
   }
 });
 
 // DELETE POST
-router.delete("/:id", verifyRoles, async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (!post) {
-      return res.status(404).json({ message: "Post not found" });
+      return res.status(404).json({ message: 'Post not found' });
     }
 
-    const { roles } = req.user;
-    if (roles && roles.includes(ROLES_LIST.Admin)) {
+    const { userId, roles } = req.body;
+    if (!userId || !roles) {
+      return res.status(400).json({ message: 'User ID and roles are required' });
+    }
+
+    console.log('Roles and User ID in Delete:', roles, userId);
+
+    if (roles.Admin === 5150) { // Check if Admin role exists and is set to 5150
       await Post.deleteOne({ _id: req.params.id });
-      res.status(200).json({ message: "Post deleted successfully" });
+      return res.status(200).json({ message: 'Post deleted successfully' });
     } else {
-      // If not an admin, check if the user owns the post
-      if (post.userId === req.body.userId) {
+      if (post.userId.equals(userId)) { // Ensure proper comparison
         await Post.deleteOne({ _id: req.params.id });
-        res.status(200).json({ message: "Post deleted successfully" });
+        return res.status(200).json({ message: 'Post deleted successfully' });
       } else {
-        res.status(401).json({ message: "You can delete only your post!" });
+        return res.status(401).json({ message: 'You can delete only your post!' });
       }
     }
   } catch (err) {
-    console.error("Error deleting post:", err);
+    console.error('Error deleting post:', err);
     res.status(500).json(err);
   }
 });

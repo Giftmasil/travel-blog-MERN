@@ -11,7 +11,7 @@ export default function SearchResults() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await axios.get(`https://travel-blog-mern-yk6m.onrender.com/api/search?query=${query}`);
+      const res = await axios.get(`http://localhost:5000/api/search?query=${query}`);
       setPosts(res.data);
     };
     if (query) {

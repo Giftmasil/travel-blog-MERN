@@ -5,7 +5,7 @@ import axios from "axios";
 import { Context } from "../../context/Context";
 
 export default function Post({ post }) {
-  const PF = "https://dummy-practice-upload.onrender.com/images/";
+  const PF = "http://localhost:5000/images/";
   const { user } = useContext(Context);
   const [likes, setLikes] = useState(post.likes);
   const [isLiked, setIsLiked] = useState(post.likes.includes(user._id));
@@ -18,10 +18,10 @@ export default function Post({ post }) {
   const handleLike = async () => {
     try {
       if (isLiked) {
-        await axios.put(`https://travel-blog-mern-yk6m.onrender.com/api/posts/${post._id}/unlike`, { userId: user._id });
+        await axios.put(`http://localhost:5000/api/posts/${post._id}/unlike`, { userId: user._id });
         setLikes(likes.filter((id) => id !== user._id));
       } else {
-        await axios.put(`https://travel-blog-mern-yk6m.onrender.com/api/posts/${post._id}/like`, { userId: user._id });
+        await axios.put(`http://localhost:5000/api/posts/${post._id}/like`, { userId: user._id });
   
         // Create like notification
         const newNotification = {
@@ -29,9 +29,9 @@ export default function Post({ post }) {
           senderId: user._id,
           receiverId: post.userId,
           postId: post._id,
-          text: `${user.username} liked your post.`, // Corrected notification text
+          text: `${user.username} liked your post.`,
         };
-        await axios.post("https://travel-blog-mern-yk6m.onrender.com/api/notifications", newNotification);
+        await axios.post("http://localhost:5000/api/notifications", newNotification);
   
         setLikes([...likes, user._id]);
       }
@@ -44,7 +44,7 @@ export default function Post({ post }) {
   const handleComment = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`https://travel-blog-mern-yk6m.onrender.com/api/posts/${post._id}/comment`, {
+      const res = await axios.post(`http://localhost:5000/api/posts/${post._id}/comment`, {
         userId: user._id,
         username: user.username,
         text: comment,
@@ -57,9 +57,9 @@ export default function Post({ post }) {
         senderId: user._id,
         receiverId: post.userId,
         postId: post._id,
-        text: `${user.username} commented on your post.`, // Corrected notification text
+        text: `${user.username} commented on your post.`,
       };
-      await axios.post("https://travel-blog-mern-yk6m.onrender.com/api/notifications", newNotification);
+      await axios.post("http://localhost:5000/api/notifications", newNotification);
       
       setComment(""); // Clear comment input after submission
     } catch (err) {

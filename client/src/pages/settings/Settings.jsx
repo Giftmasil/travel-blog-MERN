@@ -17,12 +17,12 @@ export default function Settings() {
   const [userPosts, setUserPosts] = useState([]);
   const [follows, setFollows] = useState([]);
   const [followings, setFollowings] = useState([]);
-  const PF = "https://travel-blog-mern-yk6m.onrender.com/images/";
+  const PF = "http://localhost:5000/images/";
 
   useEffect(() => {
     const fetchUserPosts = async () => {
       try {
-        const res = await axios.get(`https://travel-blog-mern-yk6m.onrender.com/api/posts?user=${user.username}`);
+        const res = await axios.get(`http://localhost:5000/api/posts?user=${user.username}`);
         setUserPosts(res.data);
       } catch (err) {
         console.error("Error fetching user posts:", err);
@@ -31,7 +31,7 @@ export default function Settings() {
 
     const fetchNotifications = async () => {
       try {
-        const res = await axios.get(`https://travel-blog-mern-yk6m.onrender.com/api/notifications/${user._id}`);
+        const res = await axios.get(`http://localhost:5000/api/notifications/${user._id}`);
         setNotifications(res.data);
         setUnreadCount(res.data.filter((notif) => !notif.read).length);
       } catch (err) {
@@ -41,8 +41,8 @@ export default function Settings() {
 
     const fetchFollowsAndFollowings = async () => {
       try {
-        const followsRes = await axios.get(`https://travel-blog-mern-yk6m.onrender.com/api/users/${user._id}/followers`);
-        const followingsRes = await axios.get(`https://travel-blog-mern-yk6m.onrender.com/api/users/${user._id}/followings`);
+        const followsRes = await axios.get(`http://localhost:5000/api/users/${user._id}/followers`);
+        const followingsRes = await axios.get(`http://localhost:5000/api/users/${user._id}/followings`);
         setFollows(followsRes.data);
         setFollowings(followingsRes.data);
       } catch (err) {
@@ -57,7 +57,7 @@ export default function Settings() {
 
   const handleMarkAsRead = async (id) => {
     try {
-      await axios.put(`https://travel-blog-mern-yk6m.onrender.com/api/notifications/${id}/read`);
+      await axios.put(`http://localhost:5000/api/notifications/${id}/read`);
       setNotifications((prevNotifications) =>
         prevNotifications.map((notif) =>
           notif._id === id ? { ...notif, read: true } : notif
@@ -85,13 +85,13 @@ export default function Settings() {
       data.append("file", file);
       updatedUser.profilePic = filename;
       try {
-        await axios.post("https://travel-blog-mern-yk6m.onrender.com/api/upload", data);
+        await axios.post("http://localhost:5000/api/upload", data);
       } catch (err) {
         console.error("Error uploading file:", err);
       }
     }
     try {
-      const res = await axios.put("https://travel-blog-mern-yk6m.onrender.com/api/users/" + user._id, updatedUser);
+      const res = await axios.put("http://localhost:5000/api/users/" + user._id, updatedUser);
       setSuccess(true);
       dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
     } catch (err) {
@@ -105,7 +105,10 @@ export default function Settings() {
         <h1 style={{ marginBottom: "1rem" }}>My Profile</h1>
         <div onClick={() => setNotification(!notification)}>
           {unreadCount > 0 ? (
+            <div>
+            <p>You have {unreadCount} new notifications</p>
             <i className="fa-solid fa-bell" style={{ fontSize: "2rem", color: "green" }}></i>
+            </div>
           ) : (
             <i className="fa-regular fa-bell" style={{ fontSize: "2rem" }}></i>
           )}

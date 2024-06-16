@@ -35,13 +35,13 @@ export default function Write() {
       data.append("file", file);
       newPost.photo = filename;
       try {
-        await axios.post("https://travel-blog-mern-yk6m.onrender.com/api/upload", data);
+        await axios.post("http://localhost:5000/api/upload", data);
       } catch (err) {
         alert(`Cannot upload the image because ${err}`);
       }
     }
     try {
-      const res = await axios.post("https://travel-blog-mern-yk6m.onrender.com/api/posts", newPost);
+      const res = await axios.post("http://localhost:5000/api/posts", newPost);
       navigate("/post/" + res.data._id);
     } catch (err) {
       alert("Failed to create post");

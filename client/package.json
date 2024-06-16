@@ -46,7 +46,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://travel-blog-mern-yk6m.onrender.com",
+  "proxy": "http://localhost:5000",
   "devDependencies": {
     "@babel/core": "^7.24.7",
     "@babel/preset-env": "^7.24.7",
