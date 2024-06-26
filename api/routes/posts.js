@@ -30,7 +30,7 @@ router.put('/:id', async (req, res) => {
 
     console.log('Roles and User ID in Update:', roles, userId);
 
-    if (roles.Admin === 5150) { // Check if Admin role exists and is set to 5150
+    if (roles.Admin === 5150) { 
       const updatedPost = await Post.findByIdAndUpdate(
         req.params.id,
         { $set: req.body },
@@ -38,7 +38,7 @@ router.put('/:id', async (req, res) => {
       );
       return res.status(200).json(updatedPost);
     } else {
-      if (post.userId.equals(userId)) { // Ensure proper comparison
+      if (post.userId.equals(userId)) {
         const updatedPost = await Post.findByIdAndUpdate(
           req.params.id,
           { $set: req.body },
@@ -70,11 +70,11 @@ router.delete('/:id', async (req, res) => {
 
     console.log('Roles and User ID in Delete:', roles, userId);
 
-    if (roles.Admin === 5150) { // Check if Admin role exists and is set to 5150
+    if (roles.Admin === 5150) {
       await Post.deleteOne({ _id: req.params.id });
       return res.status(200).json({ message: 'Post deleted successfully' });
     } else {
-      if (post.userId.equals(userId)) { // Ensure proper comparison
+      if (post.userId.equals(userId)) {
         await Post.deleteOne({ _id: req.params.id });
         return res.status(200).json({ message: 'Post deleted successfully' });
       } else {
@@ -149,7 +149,7 @@ router.put("/:id/like", async (req, res) => {
   }
 });
 
-// PUT /api/posts/:id/unlike
+// UNLIKE
 router.put("/:id/unlike", async (req, res) => {
   const postId = req.params.id;
   const userId = req.body.userId;

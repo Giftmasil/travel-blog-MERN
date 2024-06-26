@@ -16,12 +16,12 @@ export default function SinglePost() {
   const [updateMode, setUpdateMode] = useState(false);
   const { user, dispatch } = useContext(Context);
   const [isFollowing, setIsFollowing] = useState(false);
-  const PF = "http://localhost:5000/images/";
+  const PF = "https://travel-blog-mern-1.onrender.com/images/";
 
   useEffect(() => {
     const getPost = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/posts/${path}`);
+        const res = await axios.get(`https://travel-blog-mern-1.onrender.com/api/posts/${path}`);
         setPost(res.data);
         setTitle(res.data.title);
         setDesc(res.data.desc);
@@ -41,7 +41,7 @@ export default function SinglePost() {
  // For updating a post
 const handleUpdate = async () => {
   try {
-    await axios.put(`http://localhost:5000/api/posts/${post._id}`, {
+    await axios.put(`https://travel-blog-mern-1.onrender.com/api/posts/${post._id}`, {
       userId: user._id, // Ensure this is correctly sent
       username: user.username,
       roles: user.roles,
@@ -59,7 +59,7 @@ const handleDelete = async () => {
   const confirm = window.confirm("Are you sure you want to delete this post?");
   if (confirm) {
     try {
-      await axios.delete(`http://localhost:5000/api/posts/${post._id}`, {
+      await axios.delete(`https://travel-blog-mern-1.onrender.com/api/posts/${post._id}`, {
         data: { 
           userId: user._id,
           username: user.username,
@@ -75,7 +75,7 @@ const handleDelete = async () => {
 
   const handleFollow = async () => {
     try {
-      await axios.post(`http://localhost:5000/api/users/${post.userId}/follow`, { userId: user._id });
+      await axios.post(`https://travel-blog-mern-1.onrender.com/api/users/${post.userId}/follow`, { userId: user._id });
       dispatch({ type: "UPDATE_SUCCESS", payload: {
         ...user,
         following: [...user.following, post.userId]
@@ -88,7 +88,7 @@ const handleDelete = async () => {
 
   const handleUnfollow = async () => {
     try {
-      await axios.put(`http://localhost:5000/api/users/${post.userId}/unfollow`, { userId: user._id });
+      await axios.put(`https://travel-blog-mern-1.onrender.com/api/users/${post.userId}/unfollow`, { userId: user._id });
       dispatch({ type: "UPDATE_SUCCESS", payload: {
         ...user,
         following: user.following.filter(id => id !== post.userId)
